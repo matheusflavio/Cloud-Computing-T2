@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spotify-dataset
+data:
+  dataset-path: "/data/2023_spotify_ds1.csv"
+  dataset-url: "https://github.com/matheusflavio/Cloud-Computing-T2/raw/main/datasets/2023_spotify_ds1.csv"

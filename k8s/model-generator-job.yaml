@@ -1,0 +1,36 @@
+# Job para executar o container ML que gera o modelo
+# Comentário: este job roda uma vez e termina, ideal para geração do modelo
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: recommender-model-generator
+  labels:
+    app: recommender-model  # label para identificar o job
+spec:
+  template:
+    metadata:
+      labels:
+        app: recommender-model
+    spec:
+      restartPolicy: OnFailure  # não reinicia se completar com sucesso
+      containers:
+      - name: model-generator
+        image: soramf/playlist-generator:0.1  # imagem do gerador (versão 0.1)
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: model-volume
+          mountPath: /output  # onde o modelo será salvo
+        - name: dataset-volume
+          mountPath: /data    # onde o dataset será montado
+        env:
+        - name: OUTPUT_PATH
+          value: /output/recommendation_model.pickle
+        - name: DATA_PATH
+          value: /data/2023_spotify_ds1.csv
+      volumes:
+      - name: model-volume
+        persistentVolumeClaim:
+          claimName: recommender-pvc  # mesmo nome do PVC
+      - name: dataset-volume
+        configMap:
+          name: spotify-dataset  # ConfigMap que será criado com os dados

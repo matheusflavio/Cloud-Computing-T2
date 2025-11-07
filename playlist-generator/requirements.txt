@@ -1,0 +1,4 @@
+pandas>=2.0.0
+numpy>=1.24.0
+mlxtend>=0.22.0
+fpgrowth-py>=1.0.0
