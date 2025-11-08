@@ -4,7 +4,7 @@ import pandas as pd
 from fpgrowth_py import fpgrowth
 
 # Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
-file_path = "../datasets/2023_spotify_ds2.csv"
+file_path = "../datasets/2023_spotify_ds1.csv"
 
 # Lê o CSV em um DataFrame (operação I/O)
 df = pd.read_csv(file_path)
