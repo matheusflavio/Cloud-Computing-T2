@@ -13,6 +13,17 @@ spec:
         app: recommender-model
     spec:
       restartPolicy: OnFailure  # não reinicia se completar com sucesso
+      initContainers:
+      - name: download-dataset
+        image: curlimages/curl:latest
+        command:
+        - sh
+        - -c
+        - |
+          curl -L -o /data/2023_spotify_ds1.csv "https://github.com/matheusflavio/Cloud-Computing-T2/raw/main/datasets/2023_spotify_ds1.csv"
+        volumeMounts:
+        - name: dataset-volume
+          mountPath: /data
       containers:
       - name: model-generator
         image: soramf/playlist-generator:0.1  # imagem do gerador (versão 0.1)
@@ -32,5 +43,4 @@ spec:
         persistentVolumeClaim:
           claimName: recommender-pvc  # mesmo nome do PVC
       - name: dataset-volume
-        configMap:
-          name: spotify-dataset  # ConfigMap que será criado com os dados
+        emptyDir: {}  # Volume temporário para o dataset (compartilhado entre init container e container principal)
