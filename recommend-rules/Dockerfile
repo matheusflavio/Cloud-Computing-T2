@@ -5,7 +5,7 @@ FROM python:3.9-slim-bullseye
 COPY requirements.txt /
 RUN pip3 install -r requirements.txt
 
-COPY generator.py /
+COPY generator.py recommend-rules/generator.py
 
 RUN ls -la 
 
