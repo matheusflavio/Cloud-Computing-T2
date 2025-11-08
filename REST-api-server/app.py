@@ -11,7 +11,7 @@ VERSION = "v1.0.0"
 
 app = Flask(__name__)
 
-MODEL_PATH = Path("./recommendation_model.pickle")
+MODEL_PATH = Path("../recommend-rules/recommendation_model.pickle")
 
 # Estado do modelo mantido na aplicação
 app.model_rules = []  # tipo: ignore
