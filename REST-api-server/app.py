@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 MODEL_PATH = Path("../recommend-rules/recommendation_model.pickle")
 if not MODEL_PATH.exists():
-    MODEL_PATH = Path("./recommend-rules//recommendation_model.pickle")
+    MODEL_PATH = Path("./recommend-rules/recommendation_model.pickle")
     if not MODEL_PATH.exists():
         MODEL_PATH = Path("./recommendation_model.pickle")
         if not MODEL_PATH.exists():
