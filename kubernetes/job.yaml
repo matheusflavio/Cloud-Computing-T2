@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: recommend-rules-matheussilva
-          image: quay.io/matheusfgs/recommend-rules-tp2-matheus:0.1
+          image: quay.io/matheusfgs/recommend-rules-tp2-matheus:0.2
           volumeMounts:
             - mountPath: /recommend-rules
               name: rules-shared
