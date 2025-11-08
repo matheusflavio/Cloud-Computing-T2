@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: api-server
-        image: soramf/recommender-api:0.1  # imagem da API (versão 0.1)
+        image: soramf/recommender-api:0.2  # imagem da API (versão 0.1)
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000  # porta que o Flask usa dentro do container

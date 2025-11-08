@@ -26,7 +26,7 @@ spec:
           mountPath: /data
       containers:
       - name: model-generator
-        image: soramf/playlist-generator:0.1  # imagem do gerador (versão 0.1)
+        image: soramf/playlist-generator:0.2  # imagem do gerador (versão 0.1)
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: model-volume

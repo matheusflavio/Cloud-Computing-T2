@@ -1,0 +1,19 @@
+HTTP 200
+"{'Server': 'Werkzeug/3.1.3 Python/3.14.0', 'Date': 'Sat, 08 Nov 2025 04:57:08 GMT', 'Content-Type': 'application/json', 'Content-Length': '238', 'Connection': 'close'}"
+
+{
+  "model_date": "2025-11-08T01:54:29.696250",
+  "songs": [
+    "bounce back",
+    "humble.",
+    "broccoli (feat. lil yachty)",
+    "xo tour llif3",
+    "ispy (feat. lil yachty)",
+    "congratulations",
+    "fake love",
+    "black beatles",
+    "t-shirt",
+    "goosebumps"
+  ],
+  "version": "v1.0.0"
+}
