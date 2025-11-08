@@ -12,7 +12,7 @@ VERSION = "v1.0.0"
 app = Flask(__name__)
 
 # Caminho padrão do modelo pickle (relativo à raiz do repositório)
-DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent / "recommend-rules" / "recommendation_model.pickle"
+DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent / "recommendation_model.pickle"
 
 print(DEFAULT_MODEL_PATH)
 
