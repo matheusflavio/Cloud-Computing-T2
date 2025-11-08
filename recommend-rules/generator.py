@@ -1,10 +1,13 @@
 import pickle
 import pandas as pd
+from pathlib import Path
 
 from fpgrowth_py import fpgrowth
 
 # Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
-file_path = "../datasets/2023_spotify_ds1.csv"
+file_path = Path("../datasets/2023_spotify_ds1.csv")
+if not file_path.exists():
+    file_path = Path("/home/datasets/spotify/2023_spotify_ds1.csv")
 
 # Lê o CSV em um DataFrame (operação I/O)
 df = pd.read_csv(file_path)
