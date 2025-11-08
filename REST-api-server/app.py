@@ -136,6 +136,9 @@ def recommend_from_rules(input_songs: List[str], top_k: int = 10) -> List[str]:
     recommendations = [item for item, _ in sorted_items][:top_k]
     return recommendations
 
+@app.route("/")
+def hello():
+    return "API online!"
 
 @app.route("/api/recommend", methods=["POST"])
 def api_recommend():
@@ -176,6 +179,5 @@ def api_recommend():
 if __name__ == "__main__":
     # Carrega o modelo na inicialização da aplicação
     load_model()
-    port = int(os.environ.get("PORT", "30502"))
     # Comentário: executa o servidor Flask; altere PORT via variável de ambiente se necessário.
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True, host="0.0.0.0", port=50024)

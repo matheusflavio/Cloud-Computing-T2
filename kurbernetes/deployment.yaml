@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-api-server-matheussilva
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rest-api-server-matheussilva
+  template:
+    metadata:
+      labels:
+        app: rest-api-server-matheussilva
+    spec:
+      containers:
+      - name: rest-api-server
+        image: quay.io/matheusfgs/rest-api-server-tp2-matheus:0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 50024

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: recommend-rules
+spec:
+ accessModes:
+   - ReadWriteMany
+ storageClassName: default-storage-class-matheussilva
+ resources:
+   requests:
+     storage: 1Gi
+ volumeName: project2-pv2-matheussilva

@@ -1,0 +1,11 @@
+project: matheussilva-project
+source:
+  repoURL: https://github.com/matheusflavio/Cloud-Computing-T2
+  path: ./kurbenetes
+  targetRevision: HEAD
+destination:
+  server: https://kubernetes.default.svc
+  namespace: matheussilva
+syncPolicy:
+  automated:
+    selfHeal: true
