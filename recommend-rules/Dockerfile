@@ -7,5 +7,6 @@ RUN pip3 install -r requirements.txt
 
 COPY generator.py /
 
+RUN ls -la 
 
 CMD ["python", "generator.py"]
