@@ -1,16 +1,13 @@
 import pickle
 import pandas as pd
-from pathlib import Path
+import ssl
 
 from fpgrowth_py import fpgrowth
 
-# Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
-file_path = Path("../datasets/2023_spotify_ds1.csv")
-if not file_path.exists():
-    file_path = Path("/home/datasets/spotify/2023_spotify_ds1.csv")
+ssl._create_default_https_context = ssl._create_unverified_context
 
-# Lê o CSV em um DataFrame (operação I/O)
-df = pd.read_csv(file_path)
+# Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
+df = pd.read_csv("https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv")
 
 # Monta transações: agrupa por playlist/session quando possível, senão usa a coluna de título
 if "pid" in df.columns and "track_name" in df.columns:
