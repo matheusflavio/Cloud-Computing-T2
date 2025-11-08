@@ -11,13 +11,7 @@ VERSION = "v1.0.0"
 
 app = Flask(__name__)
 
-# Caminho padrão do modelo pickle (relativo à raiz do repositório)
-DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent / "recommendation_model.pickle"
-
-print(DEFAULT_MODEL_PATH)
-
-# Permite sobrescrever via variável de ambiente MODEL_PATH
-MODEL_PATH = Path(os.environ.get("MODEL_PATH", str(DEFAULT_MODEL_PATH)))
+MODEL_PATH = Path("../recommend-rules/recommendation_model.pickle")
 
 # Estado do modelo mantido na aplicação
 app.model_rules = []  # tipo: ignore
