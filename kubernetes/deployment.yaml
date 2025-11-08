@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rest-api-server
-        image: quay.io/matheusfgs/rest-api-server-tp2-matheus:0.2
+        image: quay.io/matheusfgs/rest-api-server-tp2-matheus:0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 50024
