@@ -7,8 +7,6 @@ resources:
   - api-service.yaml
   - model-generator-job.yaml
   - pvc.yaml
-  - dataset-config.yaml
-  - argocd-application.yaml
 
 namespace: matheussilva
 
