@@ -12,7 +12,9 @@ VERSION = "v1.0.0"
 app = Flask(__name__)
 
 # Caminho padrão do modelo pickle (relativo à raiz do repositório)
-DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent / "playlist-generator" / "recommendation_model.pickle"
+DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent / "recommend-rules" / "recommendation_model.pickle"
+
+print(DEFAULT_MODEL_PATH)
 
 # Permite sobrescrever via variável de ambiente MODEL_PATH
 MODEL_PATH = Path(os.environ.get("MODEL_PATH", str(DEFAULT_MODEL_PATH)))
@@ -157,6 +159,8 @@ def api_recommend():
     if not payload or "songs" not in payload:
         return jsonify({"error": "JSON must contain 'songs' field with a list of song identifiers"}), 400
 
+    print(payload)
+
     songs = payload.get("songs")
     if not isinstance(songs, list):
         return jsonify({"error": "'songs' must be a list"}), 400
@@ -172,6 +176,8 @@ def api_recommend():
     recs = recommend_from_rules(songs, top_k=top_k)
 
     model_date = datetime.fromtimestamp(app.model_mtime).isoformat() if app.model_mtime else None
+
+    print(jsonify({"songs": recs, "version": VERSION, "model_date": model_date}))
 
     return jsonify({"songs": recs, "version": VERSION, "model_date": model_date})
 

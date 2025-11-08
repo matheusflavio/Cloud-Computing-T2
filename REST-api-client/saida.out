@@ -1,19 +1,18 @@
 HTTP 200
-"{'Server': 'Werkzeug/3.1.3 Python/3.14.0', 'Date': 'Sat, 08 Nov 2025 04:57:08 GMT', 'Content-Type': 'application/json', 'Content-Length': '238', 'Connection': 'close'}"
+"{'Server': 'Werkzeug/3.1.3 Python/3.14.0', 'Date': 'Sat, 08 Nov 2025 18:41:43 GMT', 'Content-Type': 'application/json', 'Content-Length': '307', 'Connection': 'close'}"
 
 {
-  "model_date": "2025-11-08T01:54:29.696250",
+  "model_date": "2025-11-08T15:04:51.891673",
   "songs": [
-    "bounce back",
-    "humble.",
-    "broccoli (feat. lil yachty)",
+    "bad and boujee (feat. lil uzi vert)",
+    "mask off",
     "xo tour llif3",
-    "ispy (feat. lil yachty)",
     "congratulations",
-    "fake love",
-    "black beatles",
-    "t-shirt",
-    "goosebumps"
+    "bounce back",
+    "dna.",
+    "ispy (feat. lil yachty)",
+    "goosebumps",
+    "broccoli (feat. lil yachty)"
   ],
   "version": "v1.0.0"
 }
