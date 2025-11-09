@@ -1,9 +1,32 @@
 import os
 import pickle
 from flask import Flask, request, jsonify
+import time # Para checar a existência do arquivo
 
 VERSION = "v1.0.0"
 app = Flask(__name__)
+
+# --- CORREÇÃO ---
+# O deployment.yaml agora monta o volume em /recommend-rules
+# Devemos ler o modelo de DENTRO desse volume
+MODEL_PATH = "/recommend-rules/recommendation_model.pickle"
+model_rules = None
+
+def load_model():
+    """Função para carregar o modelo do volume."""
+    global model_rules
+    if not os.path.exists(MODEL_PATH):
+        print(f"Aguardando modelo em: {MODEL_PATH}...")
+        return False
+    
+    try:
+        with open(MODEL_PATH, 'rb') as file:
+            model_rules = pickle.load(file)
+        print(f"Modelo carregado com sucesso de: {MODEL_PATH}")
+        return True
+    except Exception as e:
+        print(f"Erro ao carregar o modelo: {e}")
+        return False
 
 def recommend_from_rules(input_songs, model_rules, top_k=10):
     """Gera recomendações simples com base nas regras"""
@@ -19,22 +42,28 @@ def recommend_from_rules(input_songs, model_rules, top_k=10):
     # Limitar ao top_k
     return list(recommended)[:top_k]
 
-with open('/home/matheussilva/recommendation_model.pickle', 'rb') as file:
-    model_rules = pickle.load(file)
+# Tenta carregar o modelo na inicialização
+load_model()
 
 @app.route("/")
 def hello():
-    return "API online!"
+    if model_rules:
+        return f"API online! Modelo carregado. Versão: {VERSION}"
+    else:
+        return f"API online! ATENÇÃO: Modelo NÃO carregado. Verificando {MODEL_PATH}. Versão: {VERSION}"
 
 
 @app.route("/api/recommend", methods=["POST"])
 def api_recommend():
     """Endpoint que recebe JSON {"songs": [...]} e retorna recomendações."""
-    # Carregar o modelo (pode ser carregado na hora, de forma simplificada)
-    req = request.get_json(force=True)
-
+    global model_rules
+    
+    # Se o modelo não carregou na inicialização, tenta de novo.
+    # Isso ajuda caso a API tenha iniciado antes do Job terminar.
     if not model_rules:
-        return jsonify({"error": "Modelo não encontrado ou falha ao carregar."}), 500
+        print("Modelo não estava carregado. Tentando recarregar...")
+        if not load_model():
+             return jsonify({"error": "Modelo ainda não está pronto. O Job pode estar em execução."}), 503 # Service Unavailable
 
     try:
         payload = request.get_json(force=True)
@@ -54,7 +83,13 @@ def api_recommend():
     # Obter recomendações
     recs = recommend_from_rules(songs, model_rules, top_k)
 
-    return jsonify({"songs": recs, "version": VERSION, "model_date": "data do modelo (não implementado)"})
+    # Tenta pegar a data de modificação do arquivo do modelo
+    try:
+        model_time = time.ctime(os.path.getmtime(MODEL_PATH))
+    except Exception:
+        model_time = "desconhecida"
+
+    return jsonify({"songs": recs, "version": VERSION, "model_date": model_time})
 
 
 if __name__ == "__main__":

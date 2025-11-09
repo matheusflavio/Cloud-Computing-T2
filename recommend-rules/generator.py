@@ -1,10 +1,23 @@
 import pickle
 import pandas as pd
 import ssl
+import os  # Importar a biblioteca OS para manipulação de caminhos
 
 from fpgrowth_py import fpgrowth
 
 ssl._create_default_https_context = ssl._create_unverified_context
+
+# --- CORREÇÃO ---
+# O job.yaml monta o volume em /recommend-rules.
+# Vamos definir o caminho de saída para estar DENTRO desse volume.
+OUTPUT_DIR = "/recommend-rules"
+MODEL_PATH = os.path.join(OUTPUT_DIR, "recommendation_model.pickle")
+
+# Garantir que o diretório de saída exista (boa prática)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+print(f"Iniciando geração do modelo...")
+print(f"Salvando modelo em: {MODEL_PATH}")
 
 # Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
 df = pd.read_csv("https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv")
@@ -23,5 +36,9 @@ else:
 # Executa FP-Growth usando as transações construídas
 freqItemSet, rules = fpgrowth(transactions, minSupRatio=0.1, minConf=0.5)
 
-with open("/home/matheussilva/recommendation_model.pickle", 'wb') as f:
+# --- CORREÇÃO ---
+# Salvar o modelo no caminho correto (dentro do volume)
+with open(MODEL_PATH, 'wb') as f:
     pickle.dump(rules, f)
+
+print(f"Modelo salvo com sucesso em: {MODEL_PATH}")

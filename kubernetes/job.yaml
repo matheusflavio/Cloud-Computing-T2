@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: recommend-rules-matheussilva
-          image: soramf/recommend-rules-tp2-matheus:0.6
+          image: soramf/recommend-rules-tp2-matheus:0.7
           volumeMounts:
             - mountPath: /recommend-rules
               name: rules-shared
