@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: ml-rules-matheussilva
-          image: soramf/ml_rules-tp2-matheus:0.3
+          image: soramf/ml_rules-tp2-matheus:0.4
           volumeMounts:
             - mountPath: /ml_rules
               name: rules-shared
