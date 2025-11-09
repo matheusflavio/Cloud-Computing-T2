@@ -10,18 +10,6 @@ import pickle
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# --- CORREÇÃO ---
-# O job.yaml monta o volume em /recommend-rules.
-# Vamos definir o caminho de saída para estar DENTRO desse volume.
-OUTPUT_DIR = "/recommend-rules"
-MODEL_PATH = os.path.join(OUTPUT_DIR, "recommendation_model.pickle")
-
-# Garantir que o diretório de saída exista (boa prática)
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-print(f"Iniciando geração do modelo...")
-print(f"Salvando modelo em: {MODEL_PATH}")
-
 # Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
 df = pd.read_csv("https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv")
 
@@ -42,9 +30,9 @@ def encode(x):
     if x >= 1:
         return True
     
-basket_sets = transactions.applymap(encode)
+sets = transactions.applymap(encode)
 
-frequent_itemsets = apriori(basket_sets, min_support=0.07, use_colnames=True)
+frequent_itemsets = apriori(sets, min_support=0.07, use_colnames=True)
 rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
 
 rules.to_pickle("./ml_rules/model_rules.pkl")
