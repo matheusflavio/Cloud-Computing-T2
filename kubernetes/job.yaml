@@ -2,13 +2,12 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: recommend-rules-matheussilva
-  namespace: matheussilva
 spec:
   template:
     spec:
       containers:
         - name: recommend-rules-matheussilva
-          image: soramf/recommend-rules-tp2-matheus:0.1
+          image: soramf/recommend-rules-tp2-matheus:0.2
           volumeMounts:
             - mountPath: /recommend-rules
               name: rules-shared

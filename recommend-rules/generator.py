@@ -6,8 +6,6 @@ from fpgrowth_py import fpgrowth
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-MODEL_PATH = '/recommend-rules/recommendation_model.pickle'
-
 # Exemplo mínimo: carrega CSV, executa fpgrowth e salva as regras em pickle.
 df = pd.read_csv("https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv")
 
@@ -25,5 +23,7 @@ else:
 # Executa FP-Growth usando as transações construídas
 freqItemSet, rules = fpgrowth(transactions, minSupRatio=0.1, minConf=0.5)
 
-with open(MODEL_PATH, 'wb') as f:
+with open("recommendation_model.pickle", 'wb') as f:
     pickle.dump(rules, f)
+
+print(f"Modelo salvo em 'recommendation_model.pickle'")
