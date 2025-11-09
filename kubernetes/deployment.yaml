@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rest-api-server
-        image: soramf/rest-api-server-tp2-matheus:0.4
+        image: soramf/rest-api-server-tp2-matheus:0.5
         imagePullPolicy: Always
         ports:
         - containerPort: 50024
