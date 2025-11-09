@@ -11,14 +11,20 @@ VERSION = "v1.0.0"
 
 app = Flask(__name__)
 
-MODEL_PATH = Path("../recommend-rules/recommendation_model.pickle")
+# Credo
+MODEL_PATH = Path("recommend-rules/recommendation_model.pickle")
 if not MODEL_PATH.exists():
-    MODEL_PATH = Path("./recommend-rules/recommendation_model.pickle")
+    MODEL_PATH = Path("/recommend-rules/recommendation_model.pickle")
     if not MODEL_PATH.exists():
-        MODEL_PATH = Path("./recommendation_model.pickle")
+        MODEL_PATH = Path("../recommend-rules/recommendation_model.pickle")
         if not MODEL_PATH.exists():
-            MODEL_PATH = Path("../recommendation_model.pickle")
+            MODEL_PATH = Path("./recommend-rules/recommendation_model.pickle")
+            if not MODEL_PATH.exists():
+                MODEL_PATH = Path("./recommendation_model.pickle")
+                if not MODEL_PATH.exists():
+                    MODEL_PATH = Path("../recommendation_model.pickle")
 
+print("Using MODEL_PATH:")
 print(MODEL_PATH)
 
 # Estado do modelo mantido na aplicação

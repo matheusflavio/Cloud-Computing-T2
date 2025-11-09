@@ -7,6 +7,4 @@ RUN pip3 install -r requirements.txt
 
 COPY generator.py recommend-rules/generator.py
 
-RUN ls -la 
-
-CMD ["python", "generator.py"]
+CMD ["python", "./recommend-rules/generator.py"]
