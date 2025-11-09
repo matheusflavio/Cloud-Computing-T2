@@ -4,7 +4,7 @@ metadata:
   name: service-playlist-matheussilva
 spec:
   selector:
-    app: rest-api-server-matheussilva
+    app: frontend-matheussilva
   ports:
     - protocol: TCP
       port: 50024

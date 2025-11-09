@@ -1,19 +1,19 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: recommend-rules-matheussilva
+  name: ml-rules-matheussilva
 spec:
   template:
     spec:
       containers:
-        - name: recommend-rules-matheussilva
-          image: soramf/recommend-rules-tp2-matheus:0.1
+        - name: ml-rules-matheussilva
+          image: soramf/ml_rules-tp2-matheus:0.1
           volumeMounts:
-            - mountPath: /recommend-rules
+            - mountPath: /ml_rules
               name: rules-shared
       restartPolicy: Never
       volumes:
         - name: rules-shared
           persistentVolumeClaim:
-            claimName: recommend-rules
+            claimName: ml-rules
   backoffLimit: 1

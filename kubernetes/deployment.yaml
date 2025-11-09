@@ -1,31 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rest-api-server-matheussilva
+  name: frontend-matheussilva
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: rest-api-server-matheussilva
+      app: frontend-matheussilva
   template:
     metadata:
       labels:
-        app: rest-api-server-matheussilva
+        app: frontend-matheussilva
     spec:
       containers:
-      - name: rest-api-server
-        image: soramf/rest-api-server-tp2-matheus:0.1
+      - name: frontend
+        image: soramf/frontend-tp2-matheus:0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 50024
-        # --- ADIÇÃO ---
-        # Montar o mesmo volume que o Job usa
-        volumeMounts:
-        - mountPath: /recommend-rules  # O mesmo caminho que o Job
-          name: rules-shared
-      # --- ADIÇÃO ---
-      # Definir o volume para usar o mesmo PVC
-      volumes:
-      - name: rules-shared
-        persistentVolumeClaim:
-          claimName: recommend-rules # O nome do seu pvc.yaml

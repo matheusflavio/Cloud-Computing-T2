@@ -3,7 +3,10 @@ import pandas as pd
 import ssl
 import os  # Importar a biblioteca OS para manipulação de caminhos
 
-from fpgrowth_py import fpgrowth
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
+
+import pickle
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -33,12 +36,15 @@ else:
     transactions = df[obj_cols].apply(lambda r: [f"{c}:{r[c]}" for c in obj_cols if pd.notnull(r[c])], axis=1).tolist()
     transactions = [t for t in transactions if t]
 
-# Executa FP-Growth usando as transações construídas
-freqItemSet, rules = fpgrowth(transactions, minSupRatio=0.1, minConf=0.5)
+def encode(x):
+    if x <= 0:
+        return False
+    if x >= 1:
+        return True
+    
+basket_sets = transactions.applymap(encode)
 
-# --- CORREÇÃO ---
-# Salvar o modelo no caminho correto (dentro do volume)
-with open(MODEL_PATH, 'wb') as f:
-    pickle.dump(rules, f)
+frequent_itemsets = apriori(basket_sets, min_support=0.07, use_colnames=True)
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
 
-print(f"Modelo salvo com sucesso em: {MODEL_PATH}")
+rules.to_pickle("./ml_rules/model_rules.pkl")
