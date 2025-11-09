@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rest-api-server-matheussilva
+  namespace: matheussilva
 spec:
   replicas: 2
   selector:
@@ -14,7 +15,14 @@ spec:
     spec:
       containers:
       - name: rest-api-server
-        image: soramf/rest-api-server-tp2-matheus:0.4
+        image: soramf/rest-api-server-tp2-matheus:0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 50024
+        volumeMounts:
+          - mountPath: /recommend-rules
+            name: rules-shared
+      volumes:
+        - name: rules-shared
+          persistentVolumeClaim:
+            claimName: recommend-rules  

@@ -5,6 +5,8 @@ from flask import Flask, request, jsonify
 VERSION = "v1.0.0"
 app = Flask(__name__)
 
+MODEL_PATH = '/recommend-rules/recommendation_model.pickle'
+
 def recommend_from_rules(input_songs, model_rules, top_k=10):
     """Gera recomendações simples com base nas regras"""
     input_set = set(map(lambda s: s.lower().strip(), input_songs))
@@ -29,11 +31,8 @@ def hello():
 def api_recommend():
     """Endpoint que recebe JSON {"songs": [...]} e retorna recomendações."""
     # Carregar o modelo (pode ser carregado na hora, de forma simplificada)
-    req = request.get_json(force=True)
 
-    model_rules = '../recommend-rules/recommendation_model.pickle'
-
-    with open(model_rules, 'rb') as rules:
+    with open(MODEL_PATH, 'rb') as rules:
         model_rules = pickle.load(rules)
 
     if not model_rules:
@@ -61,4 +60,4 @@ def api_recommend():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=50024)
+    app.run(debug=True, host="0.0.0.0")
