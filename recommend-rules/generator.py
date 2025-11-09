@@ -23,7 +23,5 @@ else:
 # Executa FP-Growth usando as transações construídas
 freqItemSet, rules = fpgrowth(transactions, minSupRatio=0.1, minConf=0.5)
 
-with open("recommendation_model.pickle", 'wb') as f:
+with open("/home/matheussilva/project2-pv/recommendation_model.pickle", 'wb') as f:
     pickle.dump(rules, f)
-
-print(f"Modelo salvo em 'recommendation_model.pickle'")
