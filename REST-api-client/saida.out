@@ -1,17 +1,17 @@
 HTTP 200
-"{'Server': 'Werkzeug/3.1.3 Python/3.14.0', 'Date': 'Sun, 09 Nov 2025 01:04:01 GMT', 'Content-Type': 'application/json', 'Content-Length': '307', 'Connection': 'close'}"
+"{'Server': 'Werkzeug/3.1.3 Python/3.14.0', 'Date': 'Sun, 09 Nov 2025 01:16:29 GMT', 'Content-Type': 'application/json', 'Content-Length': '319', 'Connection': 'close'}"
 
 {
-  "model_date": "2025-11-08T21:56:11.859656",
+  "model_date": "data do modelo (não implementado)",
   "songs": [
-    "bad and boujee (feat. lil uzi vert)",
-    "mask off",
     "xo tour llif3",
-    "congratulations",
+    "mask off",
+    "bad and boujee (feat. lil uzi vert)",
+    "ispy (feat. lil yachty)",
     "bounce back",
     "dna.",
-    "ispy (feat. lil yachty)",
     "goosebumps",
+    "congratulations",
     "broccoli (feat. lil yachty)"
   ],
   "version": "v1.0.0"
