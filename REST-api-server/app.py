@@ -19,7 +19,7 @@ def recommend_from_rules(input_songs, model_rules, top_k=10):
     # Limitar ao top_k
     return list(recommended)[:top_k]
 
-with open('/home/matheussilva/project2-pv/recommendation_model.pickle', 'rb') as file:
+with open('/home/matheussilva/recommendation_model.pickle', 'rb') as file:
     model_rules = pickle.load(file)
 
 @app.route("/")
