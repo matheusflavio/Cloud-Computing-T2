@@ -5,20 +5,6 @@ from flask import Flask, request, jsonify
 VERSION = "v1.0.0"
 app = Flask(__name__)
 
-# Caminho do arquivo de regras
-MODEL_PATH = os.path.join(os.path.dirname(__file__), '../recommend-rules/recommendation_model.pickle')
-
-
-def load_model():
-    """Carrega o modelo de maneira simples"""
-    if not os.path.exists(MODEL_PATH):
-        app.logger.warning(f"Modelo não encontrado em {MODEL_PATH}")
-        return None
-
-    with open(MODEL_PATH, "rb") as f:
-        return pickle.load(f)
-
-
 def recommend_from_rules(input_songs, model_rules, top_k=10):
     """Gera recomendações simples com base nas regras"""
     input_set = set(map(lambda s: s.lower().strip(), input_songs))
@@ -43,7 +29,12 @@ def hello():
 def api_recommend():
     """Endpoint que recebe JSON {"songs": [...]} e retorna recomendações."""
     # Carregar o modelo (pode ser carregado na hora, de forma simplificada)
-    model_rules = load_model()
+    req = request.get_json(force=True)
+
+    model_rules = '../recommend-rules/recommendation_model.pickle'
+
+    with open(model_rules, 'rb') as rules:
+        model_rules = pickle.load(rules)
 
     if not model_rules:
         return jsonify({"error": "Modelo não encontrado ou falha ao carregar."}), 500
