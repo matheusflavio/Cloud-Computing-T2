@@ -16,4 +16,4 @@ spec:
         - name: rules-shared
           persistentVolumeClaim:
             claimName: recommend-rules
-  backoffLimit: 4
+  backoffLimit: 1
