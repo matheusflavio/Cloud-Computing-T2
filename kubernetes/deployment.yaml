@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: soramf/frontend-tp2-matheus:0.2
+        image: soramf/frontend-tp2-matheus:0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 50024
