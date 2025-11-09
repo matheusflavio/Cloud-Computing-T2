@@ -1,6 +1,6 @@
 FROM python:3.9-slim-bullseye
 
-WORKDIR /server
+#WORKDIR /server
 
 COPY requirements.txt requirements2.txt
 RUN pip3 install -r requirements2.txt
