@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: recommend-rules-matheussilva
-          image: soramf/recommend-rules-tp2-matheus:0.7
+          image: soramf/recommend-rules-tp2-matheus:0.1
           volumeMounts:
             - mountPath: /recommend-rules
               name: rules-shared
@@ -16,4 +16,4 @@ spec:
         - name: rules-shared
           persistentVolumeClaim:
             claimName: recommend-rules
-  backoffLimit: 1
+  backoffLimit: 4
