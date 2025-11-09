@@ -1,10 +1,10 @@
 FROM python:3.9-slim-bullseye
 
-WORKDIR /app
+#WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
-COPY generator.py /app/generator.py
-
+COPY requirements.txt /
 RUN pip3 install -r requirements.txt
 
-CMD ["python", "generator.py"]
+COPY ml_code_music.py /
+
+CMD ["python", "ml_code_music.py"]
