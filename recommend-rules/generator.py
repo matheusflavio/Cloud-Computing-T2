@@ -23,9 +23,7 @@ else:
 # Executa FP-Growth usando as transações construídas
 freqItemSet, rules = fpgrowth(transactions, minSupRatio=0.1, minConf=0.5)
 
-# Persiste apenas as regras geradas (formato simples para consumo pelo servidor)
-model_path = "./recommendation_model.pickle"
-with open(model_path, 'wb') as f:
+with open("./recommendation_model.pickle", 'wb') as f:
     pickle.dump(rules, f)
 
-print(f"Modelo salvo em {model_path}")
+print(f"Modelo salvo em 'recommendation_model.pickle'")
